@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "create-rollup-typescript-app",
   "version": "1.0.6",
   "description": "An easy to use template for creating a TypeScript app with Rollup",
   "main": "dist/index.js",
