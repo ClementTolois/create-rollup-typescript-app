@@ -2,10 +2,11 @@ import inquirer from 'inquirer';
 import shell from 'shelljs';
 import fs from 'fs';
 import { rimraf } from 'rimraf';
+
 import checkEnv from '@/utils/CheckEnv';
 import questions from '@/utils/Questions';
 import Spinner from '@/utils/Spinner';
-import findBranch from './utils/FindBranch';
+import findBranch from '@/utils/FindBranch';
 
 const GIT_REPOSITORY = 'git@github.com:ClementTolois/rollup-typescript-app-template.git';
 
