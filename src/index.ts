@@ -25,7 +25,7 @@ const updatePackageJson = (projectName: string): Promise<void> => {
     return new Promise((resolve, reject) => {
         const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
         packageJson.name = projectName;
-        fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+        fs.writeFileSync(`./${projectName}/package.json`, JSON.stringify(packageJson, null, 2));
         resolve();
     });
 };
@@ -54,7 +54,7 @@ inquirer.prompt(questions).then(async answers => {
     Spinner.update("Installing dependencies...");
     await execute(`cd ${projectName} && ${packageManager} install`);
     Spinner.stop();
-    console.log(`Project ${projectName} created !`);
+    console.log(`Project ${projectName} created! Enjoy 😊`);
 
     if (openVSCode) {
         await execute(`code ./${projectName}`);
