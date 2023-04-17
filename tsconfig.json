@@ -5,6 +5,7 @@
             "@/*": ["src/*"]
         },
         "esModuleInterop": true,
+        "resolveJsonModule": true,
         "strict": true
     },
     "include": [

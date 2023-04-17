@@ -11,11 +11,18 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "dependencies": {},
+    "dependencies": {
+        "inquirer": "^9.1.5",
+        "ora": "^6.3.0",
+        "rimraf": "^5.0.0",
+        "shelljs": "^0.8.5"
+    },
     "devDependencies": {
         "@rollup/plugin-run": "^3.0.1",
         "@rollup/plugin-typescript": "^11.1.0",
+        "@types/inquirer": "^9.0.3",
         "@types/node": "^18.15.11",
+        "@types/shelljs": "^0.8.12",
         "rollup": "^3.20.4",
         "tslib": "^2.5.0"
     }

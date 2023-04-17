@@ -5,7 +5,8 @@ export default {
     input: "src/index.ts",
     output: {
         file: "dist/index.js",
-        format: "cjs",
+        format: "es",
+        banner: "#!/usr/bin/node",
     },
-    plugins: [typescript(), run()],
+    plugins: [typescript()],
 };
