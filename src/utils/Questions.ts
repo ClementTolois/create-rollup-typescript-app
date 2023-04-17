@@ -17,6 +17,12 @@ const questions: QuestionCollection = [
         name: "useJest",
         message: "Do you want to use Jest ?",
         default: true
+    },
+    {
+        type: "confirm",
+        name: "openVSCode",
+        message: "Do you want to open the project in VSCode after installation?",
+        default: false
     }
 ];
 

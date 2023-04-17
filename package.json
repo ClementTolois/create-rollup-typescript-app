@@ -1,33 +1,33 @@
 {
-    "name": "create-rollup-typescript-app",
-    "version": "1.0.5",
-    "description": "An easy to use template for creating a TypeScript app with Rollup",
-    "main": "dist/index.js",
-    "bin": "dist/index.js",
-    "type": "module",
-    "scripts": {
-        "build": "rollup -c --compact",
-        "dev": "rollup -c -w"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "inquirer": "^9.1.5",
-        "ora": "^6.3.0",
-        "rimraf": "^5.0.0",
-        "shelljs": "^0.8.5"
-    },
-    "devDependencies": {
-        "@rollup/plugin-run": "^3.0.1",
-        "@rollup/plugin-typescript": "^11.1.0",
-        "@types/inquirer": "^9.0.3",
-        "@types/node": "^18.15.11",
-        "@types/shelljs": "^0.8.12",
-        "rollup": "^3.20.4",
-        "tslib": "^2.5.0"
-    },
-    "files": [
-        "dist/index.js"
-    ]
+  "name": "demo",
+  "version": "1.0.6",
+  "description": "An easy to use template for creating a TypeScript app with Rollup",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c --compact",
+    "dev": "rollup -c -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^9.1.5",
+    "ora": "^6.3.0",
+    "rimraf": "^5.0.0",
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-run": "^3.0.1",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.15.11",
+    "@types/shelljs": "^0.8.12",
+    "rollup": "^3.20.4",
+    "tslib": "^2.5.0"
+  },
+  "files": [
+    "dist/index.js"
+  ]
 }

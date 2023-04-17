@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import shell from 'shelljs';
+import { exec } from 'child_process';
 import fs from 'fs';
 import { rimraf } from 'rimraf';
 
@@ -10,32 +10,53 @@ import findBranch from '@/utils/FindBranch';
 
 const GIT_REPOSITORY = 'git@github.com:ClementTolois/rollup-typescript-app-template.git';
 
+const execute = (command: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            }
+            resolve();
+        });
+    });
+};
+
+const updatePackageJson = (projectName: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+        packageJson.name = projectName;
+        fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+        resolve();
+    });
+};
+
 checkEnv();
 inquirer.prompt(questions).then(async answers => {
-    const { projectName, packageManager } = answers;
+    const { projectName, packageManager, openVSCode } = answers;
     const branch = findBranch(answers);
 
     Spinner.start("Creating project...");
-    shell.exec(`mkdir ${projectName}`, { silent: true });
-    shell.cd(projectName);
+    await execute(`mkdir ${projectName}`);
 
     Spinner.update("Cloning repository...");
-    shell.exec(`git clone ${GIT_REPOSITORY} .`, { silent: true });
-    shell.exec(`git checkout ${branch}`, { silent: true });
+    await execute(`git clone ${GIT_REPOSITORY} ./${projectName}`);
+    await execute(`cd ${projectName} && git checkout ${branch}`);
 
     Spinner.update("Updating package.json...");
-    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    packageJson.name = projectName;
-    fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+    await updatePackageJson(projectName);
     
     Spinner.update("Initializing git repository...");
-    await rimraf('.git');
-    shell.exec(`git init`, { silent: true });
-    shell.exec(`git add .`, { silent: true });
-    shell.exec(`git commit -m "Initial commit"`, { silent: true });
+    await rimraf(`${projectName}/.git`);
+    await execute(`cd ${projectName} && git init`);
+    await execute(`cd ${projectName} && git add .`);
+    await execute(`cd ${projectName} && git commit -m "Initial commit"`);
 
     Spinner.update("Installing dependencies...");
-    shell.exec(`${packageManager} install`, { silent: true });
+    await execute(`cd ${projectName} && ${packageManager} install`);
     Spinner.stop();
     console.log(`Project ${projectName} created !`);
+
+    if (openVSCode) {
+        await execute(`code ./${projectName}`);
+    }
 });
