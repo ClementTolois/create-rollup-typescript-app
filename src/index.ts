@@ -23,7 +23,7 @@ const execute = (command: string): Promise<void> => {
 
 const updatePackageJson = (projectName: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+        const packageJson = JSON.parse(fs.readFileSync(`./${projectName}/package.json`, 'utf8'));
         packageJson.name = projectName;
         fs.writeFileSync(`./${projectName}/package.json`, JSON.stringify(packageJson, null, 2));
         resolve();
