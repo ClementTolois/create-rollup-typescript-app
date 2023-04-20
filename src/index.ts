@@ -10,6 +10,8 @@ import findBranches from '@/utils/FindBranches';
 
 const GIT_REPOSITORY = 'git@github.com:ClementTolois/rollup-typescript-app-template.git';
 
+let packageJson:any = {};
+
 const execute = (command: string): Promise<void> => {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout, stderr) => {
@@ -23,12 +25,33 @@ const execute = (command: string): Promise<void> => {
 
 const updatePackageJson = (projectName: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-        const packageJson = JSON.parse(fs.readFileSync(`./${projectName}/package.json`, 'utf8'));
-        packageJson.name = projectName;
-        fs.writeFileSync(`./${projectName}/package.json`, JSON.stringify(packageJson, null, 2));
+		fs.writeFileSync(`./${projectName}/package.json`, JSON.stringify({
+			...packageJson,
+			name: projectName
+		}, null, 2));
         resolve();
     });
 };
+
+const retrievePackageJson = (projectName: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+		const localPackageJson = JSON.parse(fs.readFileSync(`./${projectName}/package.json`, 'utf8'));
+		packageJson = {
+			...localPackageJson,
+			...packageJson,
+			scripts: {
+				...localPackageJson.scripts,
+				...packageJson.scripts
+			},
+			devDependencies: {
+				...localPackageJson.devDependencies,
+				...packageJson.devDependencies
+			},
+
+		}
+        resolve();
+    });
+}
 
 checkEnv();
 inquirer.prompt(questions).then(async answers => {
@@ -42,8 +65,12 @@ inquirer.prompt(questions).then(async answers => {
     await execute(`git clone ${GIT_REPOSITORY} ./${projectName}`);
 
     for (const branch of branches) {
-        Spinner.update(`Merging branch ${branch}...`);
-        await execute(`cd ${projectName} && git merge ${branch}`);
+		Spinner.update(`Merging branch ${branch}...`);
+		await execute(`cd ${projectName} && git checkout ${branch}`);
+		await retrievePackageJson(projectName);
+		await execute(`cd ${projectName} && git checkout main`);
+		await execute(`cd ${projectName} && git merge -s recursive -X ours ${branch}`);
+		
     }
 
     Spinner.update("Updating package.json...");
@@ -58,7 +85,7 @@ inquirer.prompt(questions).then(async answers => {
     Spinner.update("Installing dependencies...");
     await execute(`cd ${projectName} && ${packageManager} install`);
     Spinner.stop();
-    console.log(`Project ${projectName} created! Enjoy 😊`);
+    console.log(`✅ Project ${projectName} created! Enjoy 😊`);
 
     if (openVSCode) {
         await execute(`code ./${projectName}`);
