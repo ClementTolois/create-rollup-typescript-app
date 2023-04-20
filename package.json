@@ -19,7 +19,11 @@
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-run": "^3.0.1",
+    "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.15.11",

@@ -10,7 +10,7 @@ const questions: QuestionCollection = [
         type: "list",
         name: "packageManager",
         message: "Which package manager do you want to use ?",
-        choices: ["npm","pnpm","yarn"]
+        choices: ["npm", "pnpm", "yarn"]
     },
     {
         type: "confirm",
@@ -20,9 +20,15 @@ const questions: QuestionCollection = [
     },
     {
         type: "confirm",
+        name: "usePrettier",
+        message: "Do you want to use Prettier ?",
+        default: true
+    },
+    {
+        type: "confirm",
         name: "openVSCode",
         message: "Do you want to open the project in VSCode after installation?",
-        default: false
+        default: true
     }
 ];
 
