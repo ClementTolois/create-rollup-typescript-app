@@ -1,9 +1,9 @@
+import { exit } from 'process';
 import shell from 'shelljs';
 
 const checkGit = (): void => {
-    if (!shell.which('git')) {
-        shell.echo('Sorry, this script requires git');
-        shell.exit(1);
+	if (!shell.which('git')) {
+		throw 'Sorry, this script requires git';
     }
 }
 
