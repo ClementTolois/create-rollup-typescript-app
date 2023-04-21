@@ -1,4 +1,3 @@
-import { Answers } from 'inquirer';
 import inquirer from 'inquirer';
 import { exec } from 'child_process';
 import fs from 'fs';

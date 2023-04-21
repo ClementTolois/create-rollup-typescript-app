@@ -1,8 +1,7 @@
-# rollup-typescript-app-template
+# create-rollup-typescript-app-template
 
-This project is one of my test to create an easy to use template for a TypeScript project with Rollup. With this template you can easily create any ts app with rollup as bundler.
+This project is one of my test to create a CLI to configure quickly a basic project with rollup and typescript. You can also use this [repository](https://github.com/ClementTolois/rollup-typescript-app-template/tree/main) as a template to create your own project.
 
 ## Commands
 
-* `(pnpm|npm|yarn) run build` - Build the project
-* `(pnpm|npm|yarn) run dev` - Build and run the project in watch mode
+* `npx create-rollup-typescript-app-template`
