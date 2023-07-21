@@ -9,8 +9,8 @@
     "build": "rollup -c --compact",
     "dev": "rollup -c -w"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["npx", "rollup", "template"],
+  "author": "Clément TOLOIS <clement.tolois@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "inquirer": "^9.1.5",
