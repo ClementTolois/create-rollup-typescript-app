@@ -4,4 +4,4 @@ This project is one of my test to create a CLI to configure quickly a basic proj
 
 ## Commands
 
-* `npx create-rollup-typescript-app-template`
+* `npx create-rollup-typescript-app`
